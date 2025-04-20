@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统安全警告</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: red;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .lock-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: blink 1s infinite;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 10px;
+            text-shadow: 0 0 10px rgba(255,0,0,0.5);
+        }
+
+        .warning-box {
+            border: 3px solid red;
+            padding: 20px;
+            margin: 20px;
+            max-width: 600px;
+        }
+
+        .timer {
+            font-size: 24px;
+            color: #fff;
+            margin: 15px 0;
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .small-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <i class="fas fa-lock lock-icon"></i>
+    <h1>⚠️ 系统安全警告 ⚠️</h1>
+    
+    <div class="warning-box">
+        <p>您的设备已被安全系统锁定！</p>
+        <p>检测到非法网络活动 (代码: 0x7B92FA)</p>
+        <p>需要支付罚款以解除锁定</p>
+        <div class="timer">剩余时间: <span id="time">59:59</span></div>
+        <button onclick="showPayment()">立即支付</button>
+    </div>
+
+    <p class="small-text">24小时内未支付，将会执行死刑</p>
+
+    <script>
+        // 倒计时功能
+        let seconds = 600; // 10分钟
+        const timer = setInterval(() => {
+            seconds--;
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('time').innerHTML = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            
+            if(seconds <= 0) {
+                clearInterval(timer);
+                document.body.style.backgroundColor = "#8B0000";
+            }
+        }, 1000);
+
+        function showPayment() {
+            alert("你被骗了");
+        }
+
+        // 随机颜色闪烁效果
+        setInterval(() => {
+            document.body.style.color = 
+                `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }, 500);
+    </script>
+</body>
+</html>
